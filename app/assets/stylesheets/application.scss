@@ -1,0 +1,153 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "materialize/components/color";
+$primary-color: color("blue", "lighten-2") !default;
+$secondary-color: color("blue", "lighten-2") !default;
+@import 'materialize';
+
+div.site-content-body-container{
+  min-height: 700px;
+}
+div.site-content-body-container .site-content-body-content{
+
+}
+.nav-wrapper a.brand-logo
+{
+  height: 64px;
+}
+.nav-wrapper a.brand-logo img
+{
+  height: 64px;
+  width: auto;
+  padding: 10px;
+}
+div.login-page-content{
+  //background-image: url('background1.png');
+  //background-repeat: no-repeat, repeat;
+  //background-size: cover;
+  min-height: 100vh;
+  display: inline-block;
+  width: 100%;
+}
+.login-page-content .card.login-form-container-card{
+  position: relative;
+  margin: 70px auto;
+}
+div.col.login-form-column{
+  padding: 0px 20%;
+}
+button.login-page-button-submit{
+  float: right;
+}
+a.btn-flat{
+  color: #039be5;
+}
+.login-page-content form .btn-flat{
+  padding: 0 0;
+}
+.medium-left-margin{
+  margin-left: 16px;
+}
+.card .card-content p.alert{
+  color: #ef5350;
+}
+ul.dropdown-content {
+  background-color: #fff;
+  /* margin: 0; */
+  display: none;
+  min-width: 130px;
+  max-height: 650px;
+  overflow-y: auto;
+  opacity: 0;
+  position: absolute;
+  z-index: 999;
+  will-change: width, height;
+}
+ul.dropdown-content li > a > i {
+  height: inherit;
+  line-height: inherit;
+  float: left;
+  margin: 0 5px 0 0;
+  width: 24px;
+}
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+//////////////////////////////////////////////////////////
+div.signup-page-content{
+  //background-image: url('background1.png');
+  //background-repeat: no-repeat, repeat;
+  //background-size: cover;
+  min-height: 100vh;
+  display: inline-block;
+  width: 100%;
+}
+.signup-page-content .card.signup-form-container-card{
+  position: relative;
+  margin: 70px auto;
+}
+div.col.signup-form-column{
+  padding: 0px 20%;
+}
+button.signup-page-button-submit{
+  float: left;
+}
+.signup-page-content form .btn-flat{
+  padding: 0 0;
+}
+.file-field .btn, .file-field .btn-large{
+  height: 36px;
+}
+img.profile-pic-preview{
+  position: relative;
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin: 0px auto;
+  float: none;
+}
+///////////////////////////////////////////////////////////////////
+.input-field i.field-extra-info{
+  position: absolute;
+  bottom: 0px;
+  font-style: normal;
+  color: #78909c;
+  font-size: 12px;
+}
+.input-field i.field-extra-info.important{
+  color: #ef5350;
+}
+div.input-field.has-info-text{
+  margin-bottom: 15px;
+}
+img.profile-picture{
+  margin: 10px auto;
+  display: block;
+  width: 240px;
+  height: 240px;
+  border-radius: 120px;
+}
+button.edit-prof-pic-btn
+{
+  margin: 0px auto;
+  display: block;
+  font-size: 15px;
+}
+button i.material-icons{
+  margin-right: 10px;
+  line-height: 36px;
+  font-size: 15px;
+}

@@ -1,0 +1,123 @@
+<!--
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+-->
+<div class="signup-page-content">
+  <div class="row container">
+    <div class="col s12 signup-form-column">
+      <div class="card signup-form-container-card">
+        <div class="card-content">
+          <span class="card-title">Signup</span>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <p>Please fillout the following fields to create your account</p>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <div class="row">
+                <div class="col s12 m12 l12">
+                  <%= devise_error_messages! %>
+                </div>
+                <div class="col s12 m12 l12">
+                  <div class="row">
+                    <!--<div class="col s12 m12 l12">
+                      <img id="prof-pic-preview" src="" alt="Please upload an image" class="profile-pic-preview" />
+                    </div>-->
+                    <div class="col s12 m12 l12">
+                      <%= f.file_field :profile_pic, accept: "image/*" %>
+                      <!--<div class="file-field input-field">
+                        <div class="btn">
+                          <span>Profile Picture</span>
+                          <input name="user[profile_pic]" type="file" accept="image/*">
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input id="user_profpic" class="file-path validate"
+                                 type="text">
+                        </div>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'First Name' %>
+                  <%= f.text_field :firstname, autofocus: true %>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Last Name' %>
+                  <%= f.text_field :lastname, autofocus: true %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label :email %>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label 'Date of Birth' %>
+                  <input type="text" class="datepicker" id="user_dob" name="user[dob]">
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label :password %>
+                  <%= f.password_field :password, autocomplete: "off" %>
+                  <!--<% if @minimum_password_length %>
+                      <label for="user_password"><%= @minimum_password_length %> characters minimum</label>
+                  <% end %>-->
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label :password_confirmation %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                </div>
+
+                <div class="col s12 m12 l12">
+                  <button class="btn waves-effect waves-light signup-page-button-submit" type="submit" name="action">Signup
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: true // Close upon selecting a date,
+        });
+        /*$("#user_profpic").change(function(input) {
+            console.log(input);
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        });*/
+    });
+</script>

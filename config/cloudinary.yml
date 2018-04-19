@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: shareasnap
+  api_key: '913221532645625'
+  api_secret: AOfvLUiNeasAepeZfwevmSYDbeY
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: shareasnap
+  api_key: '913221532645625'
+  api_secret: AOfvLUiNeasAepeZfwevmSYDbeY
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: shareasnap
+  api_key: '913221532645625'
+  api_secret: AOfvLUiNeasAepeZfwevmSYDbeY
+  enhance_image_tag: true
+  static_image_support: false

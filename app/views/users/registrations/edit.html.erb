@@ -1,0 +1,111 @@
+<div class="signup-page-content">
+  <div class="row container">
+    <div class="col s12 signup-form-column">
+      <div class="card signup-form-container-card">
+        <div class="card-content">
+          <span class="card-title">Edit <%= resource_name.to_s.humanize %></span>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= devise_error_messages! %>
+          <p>Here you can view and update your profile information</p>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <div class="row">
+                <div class="col s12 m12 l12">
+                  <div class="row">
+                    <div class="col s12 m12 l12">
+                      <!--<%= f.file_field :profile_pic, accept: "image/*" %>-->
+                      <img class="profile-picture" src="<%= @user.profile_pic %>">
+                    </div>
+                    <div class="col s12 m12 l12">
+                      <button data-target="modal1" class="btn modal-trigger edit-prof-pic-btn"><i class="material-icons">mode_edit</i>Edit Profile Picture</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'First Name' %>
+                  <%= f.text_field :firstname, autofocus: true %>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Last Name' %>
+                  <%= f.text_field :lastname, autofocus: true %>
+                </div>
+                <div class="input-field has-info-text col s12 m12 l12">
+                  <%= f.label :email %>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                      <i class="field-extra-info important">Currently waiting confirmation for: <%= resource.unconfirmed_email %></i>
+                  <% end %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label 'Date of Birth' %>
+                  <input type="text" class="datepicker" id="user_dob" name="user[dob]">
+                </div>
+                <div class="input-field has-info-text col s12 m12 l12">
+                  <%= f.label :password %>
+                  <%= f.password_field :password, autocomplete: "off" %>
+                  <% if @minimum_password_length %>
+                      <!--<i class="field-extra-info important"><%= @minimum_password_length %> characters minimum</i>-->
+                      <i class="field-extra-info">Leave blank if you don't want to change it</i>
+                  <% end %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label :password_confirmation %>
+                  <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                </div>
+                <div class="input-field has-info-text col s12 m12 l12">
+                  <%= f.label :current_password %>
+                  <i class="field-extra-info important">We need your current password to confirm your changes</i>
+                  <%= f.password_field :current_password, autocomplete: "off" %>
+                </div>
+                <div class="col s12 m12 l12">
+                  <button class="btn waves-effect waves-light signup-page-button-submit" type="submit" name="action">Update
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+                <div class="col s12 m12 l12">
+                  <i>Want to remove your account completely?</i><a href="<%= registration_path(resource_name) %>" data-method="delete" onclick="return confirm('Are you sure?')" class="waves-effect waves-teal btn-flat medium-left-margin">Remove my account!</a>
+                  <!--<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>-->
+                  <%= link_to "Back", :back %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal1" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
+  <form action="<%= users_updatepicture_path %>" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+
+    <div class="modal-content">
+      <h4>Edit Profile Picture</h4>
+      <p>Please select a new profile picture and submit the change</p>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col s12 m12 l12">
+          <input type="file" accept="image/*" name="profile_pic">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+      <button style="color: rgba(19, 146, 87, 0.83);" class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>
+<script>
+    $(document).ready(function () {
+        var $dateInput = $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: true // Close upon selecting a date,
+        });
+        var picker = $dateInput.pickadate('picker')
+        picker.set('select', '<%= @user.dob %>', { format: 'yyyy-mm-dd' });
+        $('.modal').modal();
+    });
+</script>
