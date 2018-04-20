@@ -41,31 +41,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    if(!current_user)
+    if(!user_signed_in?)
       redirect_to new_user_session_path, root_path
+    elsif(current_user.role.id!=0 && current_user.id!=params[:format])
+       redirect_to root_path
     end
-    @user = current_user
+    @user = User.find_by_id(params[:format])
     puts @user.inspect
     super
   end
 
   # PUT /resource
   def update
-    rand_hex = SecureRandom.hex(10)
-    pimage = params[:user][:profile_pic]
-    if(pimage!=nil)
-      puts pimage.original_filename
-      @uploadedFile=pimage
-      cl_response = Cloudinary::Uploader.upload(@uploadedFile.tempfile, :public_id => rand_hex)
-      if(cl_response['secure_url']==nil)
-        flash[:notice]= "There is a server side problem. Please try again later"
-        redirect_to new_user_registration_path
-        return
-      end
-      params[:user][:profile_pic]=cl_response['secure_url']
-    else
-      params[:user][:profile_pic]=current_user.profile_pic
-    end
+    params[:user][:profile_pic]=current_user.profile_pic
     params[:user][:role_id]= current_user.role_id;
     puts "\n\n\n"
     puts params.inspect
@@ -78,9 +66,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    if(!user_signed_in?)
+      redirect_to new_user_session_path, root_path
+    elsif(current_user.role.id!=0 && current_user.id!=params[:format])
+      redirect_to root_path
+    end
+    @user = User.find_by_id(params[:format])
+    if @user.destroy
+      puts "\n\n\n\n #{"User deleted successffully with id #{params[:format]}"} \n\n\n\n"
+      redirect_to adminpanel_path
+    else
+      puts "\n\n\n\n #{"Unable to delete user with id #{params[:format]}"} \n\n\n\n"
+      redirect_to adminpanel_path
+    end
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

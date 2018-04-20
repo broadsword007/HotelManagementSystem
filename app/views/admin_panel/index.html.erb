@@ -1,0 +1,82 @@
+<div class="admin-page-content container">
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="admin-content-section row">
+        <div class="admin-content-section-header col s12 m12 l12">
+          <p>Users</p>
+        </div>
+        <div class="admin-content-section-desc col s12 m12 l12">
+          <p>Here you can edit or delete current users</p>
+        </div>
+        <div class="admin-content-section-content  col s12 m12 l12">
+          <table>
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Creation Date</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @users.each do |user| %>
+                <tr>
+                  <td><%= user.firstname+" "+user.lastname %></td>
+                  <td><%= user.created_at %></td>
+                  <td>
+                    <div class="table-data-button">
+                      <a class="waves-effect waves-light btn" href="<%= edit_user_registration_path(user) %>">Edit</a>
+                    </div>
+                    <div class="table-data-button">
+                      <%= link_to 'Delete', user_registration_path(user),:class =>'waves-effect waves-light btn', :confirm => 'Are you sure you want to destroy your account?', :method => :delete %>
+                      <!--<a class="waves-effect waves-light btn" data-method="delete" href="<%= url_for(controller: 'users/registrations', action: 'destroy', format: user.id) %>">Delete</a>-->
+                    </div>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l12">
+      <div class="admin-content-section row">
+        <div class="admin-content-section-header col s12 m12 l12">
+          <p>Hotels</p>
+        </div>
+        <div class="admin-content-section-desc col s12 m12 l12">
+          <p>Here you can edit or delete current hotels</p>
+        </div>
+        <div class="admin-content-section-content  col s12 m12 l12">
+          <table>
+            <thead>
+            <tr>
+              <th>Hotel Name</th>
+              <th>Address</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @hotels.each do |hotel| %>
+                <tr>
+                  <td><%= hotel.name %></td>
+                  <td><%= hotel.location %></td>
+                  <td>
+                    <div class="table-data-button">
+                      <a class="waves-effect waves-light btn" href="<%= edit_hotel_path(hotel) %>">Edit</a>
+                    </div>
+                    <div class="table-data-button">
+                      <%= link_to 'Delete', hotel_path(hotel),:class =>'waves-effect waves-light btn', :confirm => 'Are you sure you want to remove this hotel?', :method => :delete %>
+                      <!--<a class="waves-effect waves-light btn" data-method="delete" href="<%= url_for(controller: 'users/registrations', action: 'destroy', format: user.id) %>">Delete</a>-->
+                    </div>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

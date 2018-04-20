@@ -1,0 +1,22 @@
+// Place all the styles related to the admin_panel controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.admin-content-section{}
+.admin-content-section-header{
+  line-height: 24px
+}
+.admin-content-section-header p{
+  font-size: 24px;
+  margin-bottom: 0;
+}
+.admin-content-section-desc{
+  margin-top: 0px;
+  line-height: 0px;
+}
+.admin-content-section-desc p{
+
+}
+.admin-content-section-content{}
+.table-data-button {
+  display: inline-block;
+}
