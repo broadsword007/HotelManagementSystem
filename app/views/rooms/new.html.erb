@@ -1,5 +1,76 @@
-<h1>New Room</h1>
-
-<%= render 'form', room: @room %>
-
-<%= link_to 'Back', rooms_path %>
+<div class="form-page-content">
+  <div class="row container">
+    <div class="col s12 form-column">
+      <div class="card signup-form-container-card">
+        <div class="card-content">
+          <span class="card-title">Add New Room</span>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <p>Please fillout the following fields to create a new room</p>
+          <%= form_for(@room) do |f| %>
+              <div class="row">
+                <div class="col s12 m12 l12">
+                  <ul>
+                    <% @room.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <div class="col s12 m12 l12">
+                  <div class="row">
+                    <!--<div class="col s12 m12 l12">
+                      <img id="prof-pic-preview" src="" alt="Please upload an image" class="profile-pic-preview" />
+                    </div>-->
+                    <div class="col s12 m12 l12">
+                      <%= f.label 'Room Picture' %>
+                      <%= f.file_field :room_pic, accept: "image/*" %>
+                      <!--<div class="file-field input-field">
+                        <div class="btn">
+                          <span>Profile Picture</span>
+                          <input name="user[profile_pic]" type="file" accept="image/*">
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input id="user_profpic" class="file-path validate"
+                                 type="text">
+                        </div>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Room#' %>
+                  <%= f.text_field :number, autofocus: true %>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Description' %>
+                  <%= f.text_field :description, autofocus: true %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label 'Price' %>
+                  <%= f.text_field :price, autofocus: true%>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <select name="room[room_category_id]">
+                    <option value="" disabled selected>Choose room category</option>
+                    <% @categories.each do |cat| %>
+                      <option value="<%= cat.id %>"><%= cat.name %></option>
+                    <% end %>
+                  </select>
+                  <label>Room Category</label>
+                </div>
+                <div class="col s6 m6 l6">
+                  <button class="btn waves-effect waves-light form-button-submit" type="submit" name="action">Create Room
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('select').material_select();
+    });
+</script>

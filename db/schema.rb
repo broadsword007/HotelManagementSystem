@@ -10,16 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420132502) do
+ActiveRecord::Schema.define(version: 20180423035932) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float    "rating"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "hotels", force: :cascade do |t|
     t.string   "name"
     t.string   "slogan"
     t.string   "location"
-    t.string   "hotel_pic"
+    t.string   "hotel_pic_path"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -28,12 +37,26 @@ ActiveRecord::Schema.define(version: 20180420132502) do
     t.string   "name"
   end
 
+  create_table "room_categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string   "number"
     t.boolean  "isAvailable"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "room_category_id"
+    t.string   "price"
+    t.integer  "user_id"
+    t.float    "rating"
+    t.string   "room_pic_path"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["room_category_id"], name: "index_rooms_on_room_category_id"
+    t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

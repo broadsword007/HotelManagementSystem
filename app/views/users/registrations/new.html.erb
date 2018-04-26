@@ -1,33 +1,7 @@
-<!--
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
--->
-<div class="signup-page-content">
+<div class="form-page-content">
   <div class="row container">
-    <div class="col s12 signup-form-column">
-      <div class="card signup-form-container-card">
+    <div class="col s12 form-column">
+      <div class="card container-card">
         <div class="card-content">
           <span class="card-title">Signup</span>
           <p class="notice"><%= notice %></p>
@@ -86,7 +60,7 @@
                 </div>
 
                 <div class="col s12 m12 l12">
-                  <button class="btn waves-effect waves-light signup-page-button-submit" type="submit" name="action">Signup
+                  <button class="btn waves-effect waves-light form-button-submit" type="submit" name="action">Signup
                     <i class="material-icons right">send</i>
                   </button>
                 </div>

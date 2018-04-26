@@ -3,7 +3,7 @@ class AdminPanelController < ApplicationController
     if(user_signed_in?)
       if(current_user.role.id==0)
         @users=User.all
-        @hotels=Hotel.all
+        @rooms = Room.all
         render :template => "admin_panel/index"
       else
         redirect_to root_path

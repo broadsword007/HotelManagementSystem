@@ -1,5 +1,67 @@
-<h1>New Hotel</h1>
+<div class="form-page-content">
+  <div class="row container">
+    <div class="col s12 form-column">
+      <div class="card signup-form-container-card">
+        <div class="card-content">
+          <span class="card-title">Add New Hotel</span>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <p>Please fillout the following fields to create a new hotel</p>
+          <%= form_for(@hotel) do |f| %>
+              <div class="row">
+                <div class="col s12 m12 l12">
+                  <ul>
+                    <% @hotel.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <div class="col s12 m12 l12">
+                  <div class="row">
+                    <!--<div class="col s12 m12 l12">
+                      <img id="prof-pic-preview" src="" alt="Please upload an image" class="profile-pic-preview" />
+                    </div>-->
+                    <div class="col s12 m12 l12">
+                      <%= f.label 'Hotel Picture' %>
+                      <%= f.file_field :hotel_pic, accept: "image/*" %>
+                      <!--<div class="file-field input-field">
+                        <div class="btn">
+                          <span>Profile Picture</span>
+                          <input name="user[profile_pic]" type="file" accept="image/*">
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input id="user_profpic" class="file-path validate"
+                                 type="text">
+                        </div>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Name' %>
+                  <%= f.text_field :name, autofocus: true %>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Slogan' %>
+                  <%= f.text_field :slogan, autofocus: true %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label 'Location' %>
+                  <%= f.text_field :location, autofocus: true%>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label 'Description' %>
+                  <%= f.text_field :description, autofocus: true%>
+                </div>
 
-<%= render 'form', hotel: @hotel %>
-
-<%= link_to 'Back', hotels_path %>
+                <div class="col s6 m6 l6">
+                  <button class="btn waves-effect waves-light form-button-submit" type="submit" name="action">Create Hotel
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

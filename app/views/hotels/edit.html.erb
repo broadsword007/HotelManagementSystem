@@ -1,6 +1,90 @@
-<h1>Editing Hotel</h1>
+<div class="form-page-content">
+  <div class="row container">
+    <div class="col s12 form-column">
+      <div class="card container-card">
+        <div class="card-content">
+          <span class="card-title">Edit Hotel</span>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <% if(@hotel.errors.full_messages.count>0) %>
+              <div id="error_explanation">
+                <ul>
+                  <% @hotel.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+          <p>Here you can view and update hotel information</p>
+          <%= form_for(@hotel) do |f| %>
+              <div class="row">
+                <div class="col s12 m12 l12">
+                  <div class="row">
+                    <div class="col s12 m12 l12">
+                      <!--<%= f.file_field :hotel_pic, accept: "image/*" %>-->
+                      <img class="hotel-form-picture" src="<%= @hotel.hotel_pic_path %>">
+                    </div>
+                    <div class="col s12 m12 l12">
+                      <button data-target="modal1" class="btn modal-trigger edit-prof-pic-btn"><i class="material-icons">mode_edit</i>Change Hotel Picture</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Name' %>
+                  <%= f.text_field :name, autofocus: true, :value => @hotel.name %>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Slogan' %>
+                  <%= f.text_field :slogan, autofocus: true, :value => @hotel.slogan %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label 'Location' %>
+                  <%= f.text_field :location, autofocus: true, :value => @hotel.location %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label 'Description' %>
+                  <%= f.text_field :description, autofocus: true, :value => @hotel.description%>
+                </div>
+                <div class="col s12 m12 l12">
+                  <button class="btn waves-effect waves-light form-button-submit" type="submit" name="action">Update
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+                <div class="col s12 m12 l12">
+                  <i>Want to remove this hotel completely?</i><a href="<%= hotel_path(@hotel) %>" data-method="delete" onclick="return confirm('Are you sure?')" class="waves-effect waves-teal btn-flat medium-left-margin">Remove this hotel</a>
+                </div>
+                <div class="col s12 m12 l12">
+                  <%= link_to "Back", :back %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal1" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
+  <form action="<%= hotel_picture_update_path(@hotel) %>" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
 
-<%= render 'form', hotel: @hotel %>
-
-<%= link_to 'Show', @hotel %> |
-<%= link_to 'Back', hotels_path %>
+    <div class="modal-content">
+      <h4>Edit Hotel Picture</h4>
+      <p>Please select a new hotel picture and submit the change</p>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col s12 m12 l12">
+          <input type="file" accept="image/*" name="hotel_pic">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+      <button style="color: rgba(19, 146, 87, 0.83);" class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+</script>

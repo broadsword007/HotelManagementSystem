@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :rooms
-  resources :hotels
   devise_for :users, controllers: {
       sessions: 'users/sessions',
       registrations: 'users/registrations'
@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'root#index'
   get '/adminpanel', to: 'admin_panel#index'
+  post '/room/:id/updatepicture', to: "rooms#update_picture", as: 'room_picture_update'
 end

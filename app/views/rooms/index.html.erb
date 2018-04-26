@@ -5,6 +5,12 @@
 <table>
   <thead>
     <tr>
+      <th>Number</th>
+      <th>Isavailable</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>User</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +18,12 @@
   <tbody>
     <% @rooms.each do |room| %>
       <tr>
+        <td><%= room.number %></td>
+        <td><%= room.isAvailable %></td>
+        <td><%= room.description %></td>
+        <td><%= room.category %></td>
+        <td><%= room.price %></td>
+        <td><%= room.user %></td>
         <td><%= link_to 'Show', room %></td>
         <td><%= link_to 'Edit', edit_room_path(room) %></td>
         <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
