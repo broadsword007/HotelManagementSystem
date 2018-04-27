@@ -1,0 +1,25 @@
+<%= stylesheet_link_tag 'room_categories' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @room_category.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @room_category.description %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @room_category.rate %>
+</p>
+
+<p>
+  <strong>Category pic path:</strong>
+  <%= @room_category.category_pic_path %>
+</p>
+
+<%= link_to 'Edit', edit_room_category_path(@room_category) %> |
+<%= link_to 'Back', room_categories_path %>

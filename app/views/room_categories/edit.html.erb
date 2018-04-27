@@ -1,0 +1,89 @@
+<%= stylesheet_link_tag 'room_categories' %>
+
+<div class="form-page-content">
+  <div class="row container">
+    <div class="col s12 form-column">
+      <div class="card container-card">
+        <div class="card-content">
+          <span class="card-title">Edit Room <%= @room_category.name %></span>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <% if(@room_category.errors.full_messages.count>0) %>
+              <div id="error_explanation">
+                <ul>
+                  <% @room_category.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+          <p>Here you can view and update room information</p>
+          <%= form_for(@room_category) do |f| %>
+              <div class="row">
+                <div class="col s12 m12 l12">
+                  <div class="row">
+                    <div class="col s12 m12 l12">
+                      <!--<%= f.file_field :category_pic, accept: "image/*" %>-->
+                      <img class="room-form-picture" src="<%= @room_category.category_pic_path %>">
+                    </div>
+                    <div class="col s12 m12 l12">
+                      <button data-target="modal1" class="btn modal-trigger edit-prof-pic-btn"><i class="material-icons">mode_edit</i>Change Room Picture</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Name' %>
+                  <%= f.text_field :name, autofocus: true, :value => @room_category.name %>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Description' %>
+                  <%= f.text_field :description, autofocus: true, :value => @room_category.description %>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'Rate' %>
+                  <%= f.text_field :rate, autofocus: true, :value => @room_category.rate %>
+                </div>
+                <div class="col s12 m12 l12">
+                  <button class="btn waves-effect waves-light form-button-submit" type="submit" name="action">Update
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+                <div class="col s12 m12 l12">
+                  <i>Want to remove this hotel completely?</i><a href="<%= room_category_path(@room_category) %>" data-method="delete" onclick="return confirm('Are you sure?')" class="waves-effect waves-teal btn-flat medium-left-margin">Remove this room</a>
+                </div>
+                <div class="col s12 m12 l12">
+                  <%= link_to "Back", :back %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal1" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
+  <form action="<%= room_category_picture_update_path(@room_category) %>" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+
+    <div class="modal-content">
+      <h4>Edit Room Category Picture</h4>
+      <p>Please select a new room category picture and submit the change</p>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col s12 m12 l12">
+          <input type="file" accept="image/*" name="category_pic">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+      <button style="color: rgba(19, 146, 87, 0.83);" class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+        $('select').material_select();
+    });
+</script>

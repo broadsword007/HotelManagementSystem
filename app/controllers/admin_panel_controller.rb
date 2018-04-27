@@ -4,6 +4,7 @@ class AdminPanelController < ApplicationController
       if(current_user.role.id==0)
         @users=User.all
         @rooms = Room.all
+        @categories = RoomCategory.all
         render :template => "admin_panel/index"
       else
         redirect_to root_path

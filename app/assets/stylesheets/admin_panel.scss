@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .admin-content-section{}
+.admin-page-content.container{
+  margin-top: 50px;
+}
+html body div{
+  font-size: 14px;
+  line-height: 14px;
+}
 .admin-content-section-header{
   line-height: 24px
 }
@@ -10,11 +17,12 @@
   margin-bottom: 0;
 }
 .admin-content-section-desc{
-  margin-top: 0px;
+  margin-top: 8px;
   line-height: 0px;
 }
 .admin-content-section-desc p{
-
+  font-size: 14px;
+  line-height: 14px;
 }
 .admin-content-section-content{}
 .table-data-button {

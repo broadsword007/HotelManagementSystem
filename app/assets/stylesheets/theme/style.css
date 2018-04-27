@@ -467,7 +467,7 @@ li.menu__item:nth-child(6) {
 /*-- //banner-text --*/
 /*-- banner-top --*/
 .w3layouts-banner-top{
-    background: url(assets/theme/1.jpg) no-repeat 0px 0px;
+    background: url(1.jpg) no-repeat 0px 0px;
     background-size: cover;	
 	-webkit-background-size: cover;	
 	-moz-background-size: cover;
@@ -475,7 +475,7 @@ li.menu__item:nth-child(6) {
 	-moz-background-size: cover;
 }
 .w3layouts-banner-top1{
-	background: url(assets/theme/2.jpg) no-repeat 0px 0px;
+	background: url(2.jpg) no-repeat 0px 0px;
     background-size: cover;	
 	-webkit-background-size: cover;	
 	-moz-background-size: cover;
@@ -483,7 +483,7 @@ li.menu__item:nth-child(6) {
 	-moz-background-size: cover;
 }
 .w3layouts-banner-top2{
-	background: url(assets/theme/3.jpg) no-repeat 0px 0px;
+	background: url(3.jpg) no-repeat 0px 0px;
     background-size: cover;	
 	-webkit-background-size: cover;	
 	-moz-background-size: cover;
@@ -567,16 +567,16 @@ li.menu__item:nth-child(6) {
     text-decoration: none;
     height: 34px;
     width: 34px;
-    background: url(assets/theme/left.png) no-repeat 0px 0px;
+    background: url(left.png) no-repeat 0px 0px;
 }
 .callbacks_nav.next {
     left: auto;
-    background: url(assets/theme/right.png) no-repeat 0px 0px;
+    background: url(right.png) no-repeat 0px 0px;
     right: -62px;
 }
 .callbacks_nav.prev {
     left: auto;
-    background: url(assets/theme/left.png) no-repeat 0px 0px;
+    background: url(left.png) no-repeat 0px 0px;
     left: -58px;
 }
 #slider3-pager a {
@@ -1115,7 +1115,7 @@ p.about-para-w3ls {
 /*-- //about --*/
 /*--sevices-section--*/
 .advantages {
-    background: url(assets/theme/services.jpg)no-repeat;
+    background: url(services.jpg)no-repeat;
     min-height: 350px;
     background-size: cover;
 }
@@ -1167,16 +1167,16 @@ p.about-para-w3ls {
 /*-- team --*/
 
 .tab1 .team-img-w3-agile{
-	  background: url(assets/theme/teamb1.jpg)no-repeat 0px 0px;
+	  background: url(teamb1.jpg)no-repeat 0px 0px;
 }
 .tab2 .team-img-w3-agile{
-	  background: url(assets/theme/teamb2.jpg)no-repeat 0px 0px;
+	  background: url(teamb2.jpg)no-repeat 0px 0px;
 }
 .tab3 .team-img-w3-agile{
-	  background: url(assets/theme/teamb3.jpg)no-repeat 0px 0px;
+	  background: url(teamb3.jpg)no-repeat 0px 0px;
 }
 .tab4 .team-img-w3-agile{
-	  background: url(assets/theme/teamb4.jpg)no-repeat 0px 0px;
+	  background: url(teamb4.jpg)no-repeat 0px 0px;
 }
 .tab1 .team-img-w3-agile,.tab2 .team-img-w3-agile,.tab3 .team-img-w3-agile,.tab4 .team-img-w3-agile{
 	-webkit-background-size: cover;
@@ -1475,7 +1475,7 @@ text-align:center;
 /*-- //Gallery Section --*/
 /*-- contact --*/
 section.contact-w3ls {
-	background:url(assets/theme/contact.jpg) no-repeat;
+	background:url(contact.jpg) no-repeat;
 	background-position:center;
 	background-attachment:fixed;
 	background-size:100% 100%;
@@ -1629,7 +1629,7 @@ color: #fff !important;
     height: 32px;
     border: none;
     text-indent: 100%;
-    background: url(assets/theme/arr.png) no-repeat 0px 0px;
+    background: url(arr.png) no-repeat 0px 0px;
 }
 #toTopHover {
     width: 32px;
