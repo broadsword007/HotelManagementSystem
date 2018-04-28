@@ -52,7 +52,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     @user = User.find_by_id(params[:format])
     puts @user.inspect
-    super
   end
 
   # PUT /resource
