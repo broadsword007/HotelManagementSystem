@@ -49,7 +49,6 @@ class RoomsController < ApplicationController
     puts params.inspect
     @room = Room.new(room_params)
     cat = RoomCategory.find_by_id(room_params[:room_category_id])
-    @room.user=current_user
     @room.room_category=cat
     puts "\n\n\nRoom Object\n"
     puts @room.inspect

@@ -1,0 +1,46 @@
+<h1>Editing Booking</h1>
+
+<%= render 'form', booking: @booking %>
+
+<%= link_to 'Show', @booking %> |
+<%= link_to 'Back', bookings_path %>
+
+<div class="form-page-content">
+  <div class="row container">
+    <div class="col s12 form-column">
+      <div class="card signup-form-container-card">
+        <div class="card-content">
+          <span class="card-title">Edit Booking</span>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <p>Please fillout the following fields to edit booking</p>
+          <%= form_for(@booking) do |f| %>
+              <div class="row">
+                <div class="col s12 m12 l12">
+                  <ul>
+                    <% @booking.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                  <%= f.label 'From' %>
+                  <%= f.text_field :from, autofocus: true, value: @booking.from %>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                  <%= f.label 'To' %>
+                  <%= f.text_field :to, autofocus: true, value: @booking.to%>
+                </div>
+
+                <div class="col s6 m6 l6">
+                  <button class="btn waves-effect waves-light form-button-submit" type="submit" name="action">Update
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

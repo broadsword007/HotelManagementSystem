@@ -28,7 +28,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       return
     end
     params[:user][:profile_pic]=cl_response['secure_url']
-    params[:user][:role_id]= Role.find(1).id;
+    if(User.all.count==0)
+      params[:user][:role_id]= Role.find(0).id; # make first user the admin
+    else
+      params[:user][:role_id]= Role.find(1).id;
+    end
     puts "\n\n\n"
     puts params.inspect
     # params=filterParams
@@ -134,9 +138,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         return
       end
       current_user.update(profile_pic: cl_response['secure_url'])
-      redirect_to edit_user_registration_path
+      redirect_to edit_user_registration_path(current_user)
     else
-      redirect_to edit_user_registration_path
+      redirect_to edit_user_registration_path(current_user)
       return
     end
   end

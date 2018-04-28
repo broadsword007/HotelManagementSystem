@@ -11,7 +11,6 @@ class Users::SessionsController  < DeviseController
     yield resource if block_given?
     respond_with(resource, serialize_options(resource))
   end
-
   # POST /resource/sign_in
   def create
     self.resource = warden.authenticate!(auth_options)
@@ -32,7 +31,10 @@ class Users::SessionsController  < DeviseController
     yield if block_given?
     respond_to_on_destroy
   end
-
+  def show
+    @bookings = Booking.all
+    @comments = Comment.all
+  end
   protected
 
   def sign_in_params
@@ -53,7 +55,6 @@ class Users::SessionsController  < DeviseController
   def translation_scope
     'devise.sessions'
   end
-
   private
 
   # Check if there is no signed in user before doing the sign out.

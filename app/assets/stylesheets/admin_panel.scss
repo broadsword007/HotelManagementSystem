@@ -28,10 +28,13 @@ html body div{
 .table-data-button {
   display: inline-block;
 }
-.admin-content-section-content tr div.table-data-button{
+div.table-data-button{
   float: right;
   margin: 5px 10px;
 }
 div.table-data-button a.btn{
   font-size: 10px;
+}
+.top-buttons-bar .table-data-button{
+  float: right;
 }

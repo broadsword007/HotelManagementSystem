@@ -70,6 +70,13 @@
             <li class="menu__item"><a href="#gallery" class="menu__link scroll">Gallery</a></li>
             <li class="menu__item"><a href="#rooms" class="menu__link scroll">Rooms</a></li>
             <li class="menu__item"><a href="#contact" class="menu__link scroll">Contact Us</a></li>
+            <% if user_signed_in? %>
+              <li class="menu__item"><a href="<%= users_profile_path %>" class="menu__link">My Profile</a></li>
+              <li class="menu__item"><a data-method="delete" href="<%= destroy_user_session_path %>" class="menu__link">Signout</a></li>
+            <% else %>
+              <li class="menu__item"><a href="<%= new_user_session_path %>" class="menu__link">Signin</a></li>
+              <li class="menu__item"><a href="<%= new_user_registration_path %>" class="menu__link">Signup</a></li>
+            <% end %>
           </ul>
         </nav>
       </div>
@@ -162,26 +169,25 @@
     <h2>CHECK AVAILABILITY</h2>
   </div>
   <div class="col-md-9 book-form">
-    <form action="#" method="post">
+    <form id="availCheckForm" action="<%= check_availability_path %>" method="post" accept-charset="UTF-8">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <div class="fields-w3ls form-left-agileits-w3layouts ">
         <p>Room Type</p>
-        <select class="form-control">
+        <select id="rm-cat-select" class="form-control" name="booking[room_category_id]">
           <option>Select a Room</option>
-          <option>Luxury Room</option>
-          <option>Deluxe Room</option>
-          <option>Single Room</option>
-          <option>Double Room</option>
+          <% @categories.each do |cat| %>
+              <option value="<%= cat.id %>"><%= cat.name %></option>
+          <% end %>
         </select>
       </div>
-      <div class="fields-w3ls form-date-w3-agileits">
+      <div id='arrival-date' class="fields-w3ls form-date-w3-agileits">
         <p>Arrival Date</p>
-        <input  id="datepicker1" name="Text" type="text" value="Select Date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
+        <input  id="datepicker1" name="booking[from]" type="text" value="Select Date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
       </div>
-      <div class="fields-w3ls form-date-w3-agileits">
+      <div id='dep-date' class="fields-w3ls form-date-w3-agileits">
         <p>Departure Date</p>
-        <input  id="datepicker2" name="Text" type="text" value="Select Date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
+        <input  id="datepicker2" name="booking[to]" type="text" value="Select Date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
       </div>
-
       <div class=" form-left-agileits-submit">
         <input type="submit" value="Check Availability">
       </div>
@@ -280,104 +286,6 @@
   </div>
 </div>
 <!--//sevices-->
-
-<!-- team -->
-<!--<div class="team" id="team">
-  <div class="container">
-    <h3 class="title-w3-agileits title-black-wthree">Meet Our Team</h3>
-    <div id="horizontalTab">
-      <ul class="resp-tabs-list">
-        <li>
-          <img src="assets/theme/teams1.jpg" alt=" " class="img-responsive" />
-        </li>
-        <li>
-          <img src="assets/theme/teams2.jpg" alt=" " class="img-responsive" />
-        </li>
-        <li>
-          <img src="assets/theme/teams3.jpg" alt=" " class="img-responsive" />
-        </li>
-        <li>
-          <img src="assets/theme/teams4.jpg" alt=" " class="img-responsive" />
-        </li>
-      </ul>
-      <div class="resp-tabs-container">
-        <div class="tab1">
-          <div class="col-md-6 team-img-w3-agile">
-          </div>
-          <div class="col-md-6 team-Info-agileits">
-            <h4>Lucas Jimenez</h4>
-            <span>Manager</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
-            <div class="social-bnr-agileits footer-icons-agileinfo">
-              <ul class="social-icons3">
-                <li><a href="#" class="fa fa-facebook icon-border facebook"> </a></li>
-                <li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
-                <li><a href="#" class="fa fa-google-plus icon-border googleplus"> </a></li>
-                <li><a href="#" class="fa fa-rss icon-border rss"> </a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="clearfix"> </div>
-        </div>
-        <div class="tab2">
-          <div class="col-md-6 team-img-w3-agile">
-          </div>
-          <div class="col-md-6 team-Info-agileits">
-            <h4>Sarah Connor</h4>
-            <span>Receptionist</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
-            <div class="social-bnr-agileits footer-icons-agileinfo">
-              <ul class="social-icons3">
-                <li><a href="#" class="fa fa-facebook icon-border facebook"> </a></li>
-                <li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
-                <li><a href="#" class="fa fa-google-plus icon-border googleplus"> </a></li>
-                <li><a href="#" class="fa fa-rss icon-border rss"> </a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="clearfix"> </div>
-        </div>
-        <div class="tab3">
-          <div class="col-md-6 team-img-w3-agile">
-          </div>
-          <div class="col-md-6 team-Info-agileits">
-            <h4>Ivan Simpson</h4>
-            <span>Manager</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
-            <div class="social-bnr-agileits footer-icons-agileinfo">
-              <ul class="social-icons3">
-                <li><a href="#" class="fa fa-facebook icon-border facebook"> </a></li>
-                <li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
-                <li><a href="#" class="fa fa-google-plus icon-border googleplus"> </a></li>
-                <li><a href="#" class="fa fa-rss icon-border rss"> </a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="clearfix"> </div>
-        </div>
-        <div class="tab4">
-          <div class="col-md-6 team-img-w3-agile">
-          </div>
-          <div class="col-md-6 team-Info-agileits">
-            <h4>Marc Gutierrez</h4>
-            <span>Receptionist</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
-            <div class="social-bnr-agileits footer-icons-agileinfo">
-              <ul class="social-icons3">
-                <li><a href="#" class="fa fa-facebook icon-border facebook"> </a></li>
-                <li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
-                <li><a href="#" class="fa fa-google-plus icon-border googleplus"> </a></li>
-                <li><a href="#" class="fa fa-rss icon-border rss"> </a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="clearfix"> </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>-->
-<!-- //team -->
 
 <!-- Gallery -->
 <section class="portfolio-w3ls" id="gallery">
@@ -486,99 +394,33 @@
   <div class="container">
     <h3 class="title-w3-agileits title-black-wthree">Rooms And Rates</h3>
     <div class="priceing-table-main">
-      <div class="col-md-3 price-grid">
-        <div class="price-block agile">
-          <div class="price-gd-top">
-            <img src="assets/theme/g10.jpg" alt=" " class="img-responsive" />
-            <h4>Deluxe Room</h4>
-          </div>
-          <div class="price-gd-bottom">
-            <div class="price-list">
-              <ul>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+      <% @categories.each do |cat| %>
+          <div class="col-md-3 price-grid">
+            <div class="price-block agile">
+              <div class="price-gd-top">
+                <img src="<%= cat.category_pic_path %>" alt=" " class="img-responsive" />
+                <h4><%= cat.name%> Room</h4>
+              </div>
+              <div class="price-gd-bottom">
+                <div class="price-list">
+                  <ul>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 
-              </ul>
-            </div>
-            <div class="price-selet">
-              <h3><span>$</span>320</h3>
-              <a href="#availability-agileits" class="scroll" >Book Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 price-grid ">
-        <div class="price-block agile">
-          <div class="price-gd-top">
-            <img src="assets/theme/r2.jpg" alt=" " class="img-responsive" />
-            <h4>Luxury Room</h4>
-          </div>
-          <div class="price-gd-bottom">
-            <div class="price-list">
-              <ul>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-              </ul>
-            </div>
-            <div class="price-selet">
-              <h3><span>$</span>220</h3>
-              <a href="#availability-agileits" class="scroll" >Book Now</a>
+                  </ul>
+                </div>
+                <div class="price-selet">
+                  <h3><span>$</span><%= cat.rate %></h3>
+                  <a href="#availability-agileits" class="scroll" >Book Now</a>
+                  <!--<a href="" onclick="createDialogRoomCategory('Select arrival and departure', '', <%= cat.id %>)" class="scroll" >Book Now</a>-->
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-3 price-grid lost">
-        <div class="price-block agile">
-          <div class="price-gd-top">
-            <img src="assets/theme/r3.jpg" alt=" " class="img-responsive" />
-            <h4>Guest House</h4>
-          </div>
-          <div class="price-gd-bottom">
-            <div class="price-list">
-              <ul>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-              </ul>
-            </div>
-            <div class="price-selet">
-              <h3><span>$</span>180</h3>
-              <a href="#availability-agileits" class="scroll" >Book Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 price-grid wthree lost">
-        <div class="price-block agile">
-          <div class="price-gd-top ">
-            <img src="assets/theme/r4.jpg" alt=" " class="img-responsive" />
-            <h4>Single Room</h4>
-          </div>
-          <div class="price-gd-bottom">
-            <div class="price-list">
-              <ul>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-              </ul>
-            </div>
-            <div class="price-selet">
-              <h3><span>$</span> 150</h3>
-              <a href="#availability-agileits" class="scroll" >Book Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% end %>
       <div class="clearfix"> </div>
     </div>
   </div>
@@ -586,113 +428,47 @@
 <!--// rooms & rates -->
 <!-- visitors -->
 <div class="w3l-visitors-agile" >
-  <div class="container">
-    <h3 class="title-w3-agileits title-black-wthree">What other visitors experienced</h3>
-  </div>
-  <div class="w3layouts_work_grids">
-    <section class="slider">
-      <div class="flexslider">
-        <ul class="slides">
-          <li>
-            <div class="w3layouts_work_grid_left">
-              <img src="assets/theme/5.jpg" alt=" " class="img-responsive" />
-              <div class="w3layouts_work_grid_left_pos">
-                <img src="assets/theme/c1.jpg" alt=" " class="img-responsive" />
-              </div>
-            </div>
-            <div class="w3layouts_work_grid_right">
-              <h4>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                Worth to come again
-              </h4>
-              <p>Sed tempus vestibulum lacus blandit faucibus.
-                Nunc imperdiet, diam nec rhoncus ullamcorper, nisl nulla suscipit ligula,
-                at imperdiet urna. </p>
-              <h5>Julia Rose</h5>
-              <p>Germany</p>
-            </div>
-            <div class="clearfix"> </div>
-          </li>
-          <li>
-            <div class="w3layouts_work_grid_left">
-              <img src="assets/theme/5.jpg" alt=" " class="img-responsive" />
-              <div class="w3layouts_work_grid_left_pos">
-                <img src="assets/theme/c2.jpg" alt=" " class="img-responsive" />
-              </div>
-            </div>
-            <div class="w3layouts_work_grid_right">
-              <h4>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                Worth to come again
-              </h4>
-              <p>Sed tempus vestibulum lacus blandit faucibus.
-                Nunc imperdiet, diam nec rhoncus ullamcorper, nisl nulla suscipit ligula,
-                at imperdiet urna. </p>
-              <h5>Jahnatan Smith</h5>
-              <p>United States</p>
-            </div>
-            <div class="clearfix"> </div>
-          </li>
-          <li>
-            <div class="w3layouts_work_grid_left">
-              <img src="assets/theme/5.jpg" alt=" " class="img-responsive" />
-              <div class="w3layouts_work_grid_left_pos">
-                <img src="assets/theme/c3.jpg" alt=" " class="img-responsive" />
-              </div>
-            </div>
-            <div class="w3layouts_work_grid_right">
-              <h4>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                Worth to come again
-              </h4>
-              <p>Sed tempus vestibulum lacus blandit faucibus.
-                Nunc imperdiet, diam nec rhoncus ullamcorper, nisl nulla suscipit ligula,
-                at imperdiet urna. </p>
-              <h5>Rosalind Cloer</h5>
-              <p>Italy</p>
-            </div>
-            <div class="clearfix"> </div>
-          </li>
-          <li>
-            <div class="w3layouts_work_grid_left">
-              <img src="assets/theme/5.jpg" alt=" " class="img-responsive" />
-              <div class="w3layouts_work_grid_left_pos">
-                <img src="assets/theme/c4.jpg" alt=" " class="img-responsive" />
-              </div>
-            </div>
-            <div class="w3layouts_work_grid_right">
-              <h4>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                Worth to come again
-              </h4>
-              <p>Sed tempus vestibulum lacus blandit faucibus.
-                Nunc imperdiet, diam nec rhoncus ullamcorper, nisl nulla suscipit ligula,
-                at imperdiet urna. </p>
-              <h5>Amie Bublitz</h5>
-              <p>Switzerland</p>
-            </div>
-            <div class="clearfix"> </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-  </div>
+  <% if user_signed_in? %>
+    <a href="<%= new_comment_path %>" class="add-comments-button">Add Comment</a>
+  <% end %>
+  <% if @comments.count>0 %>
+    <div class="container">
+      <h3 class="title-w3-agileits title-black-wthree">What other visitors experienced</h3>
+    </div>
+    <div class="w3layouts_work_grids">
+      <section class="slider">
+        <div class="flexslider">
+          <ul class="slides">
+            <% @comments.each do |comment| %>
+              <li>
+                <div class="w3layouts_work_grid_left">
+                  <img src="assets/theme/5.jpg" alt=" " class="img-responsive" />
+                  <div class="w3layouts_work_grid_left_pos">
+                    <img src="<%= comment.user.profile_pic %>" alt=" " class="img-responsive" />
+                  </div>
+                </div>
+                <div class="w3layouts_work_grid_right">
+                  <h4>
+                    <% comment.rating.times do  %>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                    <% end %>
+                    <% (5-comment.rating).times do  %>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <% end %>
+                    <%= comment.title %>
+                  </h4>
+                  <p><%= comment.content %></p>
+                  <h5><%= comment.user.firstname+" "+comment.user.lastname %></h5>
+                  <p></p>
+                </div>
+                <div class="clearfix"> </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </section>
+    </div>
+  <% end %>
 </div>
 <!-- visitors -->
 <!-- contact -->
@@ -871,3 +647,109 @@
 </div>
 <!-- //smooth scrolling -->
 <%= javascript_include_tag 'theme/bootstrap-3.1.1.min.js' %>
+<script>
+  $(document).ready(function () {
+      <% if notice != ""%>
+        //alert("<%= "Server says : #{notice}" %>")
+      <% end %>
+  });
+  $('#availCheckForm').submit(function (event) {
+      $.ajax({
+          type: "POST",
+          url: "<%= check_availability_path %>",
+          data: $(this).serialize(),
+          dataType: 'html',
+          success: function(data)
+          {
+              alert(data); // show response from the php script.
+              var x = JSON.parse(data)
+              if(x.success==true)
+              {
+                  createDialog("Room Available", x.reason+" Would you like to book this room?", true, x.params)
+              }
+              else
+              {
+                  createDialog("No Room Available", x.reason, false,x.params)
+              }
+          }
+      });
+     event.preventDefault()
+  });
+  function addBooking(params)
+  {
+      var p = {"booking" : params}
+      $.ajax({
+          contentType: 'application/json',
+          dataType: 'json',
+          type: "POST",
+          url: "<%= add_booking_path %>",
+          data: JSON.stringify(p),
+          success: function(data)
+          {
+              alert(data);
+          }
+      });
+
+  }
+  function createDialog(title, text, success, params) {
+      if(success)
+      {
+          return $("<div class='dialog' title='" + title + "'><p>" + text + "</p></div>")
+              .dialog({
+                  position: { my: "center", at: "center", of: $('#availability-agileits') },
+                  modal: true,
+                  buttons: {
+                      <% if user_signed_in? %>
+                        "Book this room": function () {
+                            addBooking(params);
+                            $(this).dialog("close");
+                        },
+                      <% end%>
+                      "Close": function () {
+                          $(this).dialog("close");
+                      }
+                  }
+              });
+      }
+      else
+      {
+          return $("<div class='dialog' title='" + title + "'><p>" + text + "</p></div>")
+              .dialog({
+                  position: { my: "center", at: "center", of: $('#availability-agileits') },
+                  modal: true,
+                  buttons: {
+                      "Close": function () {
+                          $(this).dialog("close");
+                      }
+                  }
+              });
+      }
+  }
+  function createDialogRoomCategory(title, text, params) {
+          return $("<div class='dialog' title='" + title + "'>" +
+                      "<div class='fields-w3ls form-date-w3-agileits'>"+
+                          "<p>Departure Date</p>"+
+                          "<input id='datepicker3' name='booking[to]' type='text' value='Select Date' onfocus='' onblur='' required='' class='hasDatepicker'>"+
+                      "</div>"+
+                      "<div class='fields-w3ls form-date-w3-agileits'>"+
+                          "<p>Departure Date</p>"+
+                          "<input id='datepicker4' name='booking[from]' type='text' value='Select Date' onfocus='' onblur='' required='' class='hasDatepicker'>"+
+                      "</div>"+
+                    "</div>")
+              .dialog({
+                  position: { my: "center", at: "center", of: $('#rooms') },
+                  modal: true,
+                  buttons: {
+                      <% if user_signed_in? %>
+                      "Book this room": function () {
+                          addBooking(params);
+                          $(this).dialog("close");
+                      },
+                      <% end%>
+                      "Close": function () {
+                          $(this).dialog("close");
+                      }
+                  }
+              });
+  }
+</script>
