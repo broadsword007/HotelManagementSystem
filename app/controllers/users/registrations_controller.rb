@@ -47,7 +47,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit
     if(!user_signed_in?)
       redirect_to new_user_session_path, root_path
-    elsif(current_user.role.id!=0 && current_user.id!=params[:format])
+    elsif(current_user.role.id!=0 && current_user.id!=(params[:format]).to_i)
        redirect_to root_path
     end
     @user = User.find_by_id(params[:format])
@@ -72,10 +72,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     if(!user_signed_in?)
       redirect_to new_user_session_path, root_path
-    elsif(current_user.role.id!=0 && current_user.id!=params[:format])
+    elsif(current_user.role.id!=0 && current_user.id!=(params[:format]).to_i)
       redirect_to root_path
     end
     @user = User.find_by_id(params[:format])
+    Comment.all.each do |comment|
+      puts "\n\n\nchecking comment #{comment.id}"
+      if(comment.user.id == @user.id)
+        comment.destroy
+      end
+    end
+    Booking.all.each do |booking|
+      puts "\n\n\nchecking booking #{booking.id}"
+      if(booking.user.id == @user.id)
+        booking.destroy
+      end
+    end
     if @user.destroy
       puts "\n\n\n\n #{"User deleted successffully with id #{params[:format]}"} \n\n\n\n"
       redirect_to adminpanel_path
